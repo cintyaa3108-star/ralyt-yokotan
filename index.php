@@ -26,8 +26,8 @@ $rutas = [
     'completar'  => ['LeccionesController', 'completar'],
     'resultados' => ['LeccionesController', 'resultados'],
     'ranking'    => ['RankingController',  'index'],
-    'abecedario' => ['PaginaController',   'abecedario'],
-    'perfil'     => ['PaginaController',   'perfil'],
+    'abecedario' => ['AbecedarioController', 'index'],
+    'perfil'     => ['PerfilController',   'index'],
 ];
 
 $ruta = $_GET['ruta'] ?? (!empty($_SESSION['uid']) ? 'inicio' : 'portada');

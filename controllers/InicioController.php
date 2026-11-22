@@ -28,13 +28,7 @@ class InicioController extends Controlador
             'nombre' => explode(' ', trim($usuario['nombre']))[0],
             'iconos' => ['escucha' => '🎧', 'memorama' => '🃏', 'escritura' => '✍️', 'lectura' => '📖'],
             'palabra' => $palabra, 'audioPalabra' => ruta_audio($palabra['audio'] ?? null),
-            'logros' => [   // se desbloquean con el avance real
-                ['⭐', 'Principiante', $hechas >= 1],
-                ['📘', 'Lector',       $niveles[4]['hechas'] >= 1],
-                ['🔥', 'Racha',        $racha >= 7],
-                ['🏆', 'Experto',      (int)$usuario['puntos'] >= 500],
-                ['👑', 'Maestro',      $niveles[4]['completo']],
-            ],
+            'logros' => array_slice(Logro::todos($usuario, $niveles, $racha), 0, 5),
         ]);
     }
 }

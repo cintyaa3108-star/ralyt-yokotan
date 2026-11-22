@@ -1,4 +1,4 @@
-    <div class="row g-4 align-items-center mb-4">
+<div class="row g-4 align-items-center mb-4">
       <div class="col-xl-7">
         <div class="d-flex align-items-center gap-4">
           <img src="resources/imagenes/ajolote.png" alt="Ajolote, mascota de RALYT" class="rl-mascota-img">
@@ -77,7 +77,7 @@
         <div class="rl-card mt-xl-4 mb-4">
           <div class="d-flex justify-content-between mb-3">
             <h3 class="rl-title mb-0">🏅 Tus logros</h3>
-            <a href="<?= u('perfil') ?>" class="small text-decoration-none" style="color: var(--r-brown)">Ver todos →</a>
+            <a href="<?= u('perfil') ?>#logros" class="small text-decoration-none" style="color: var(--r-brown)">Ver todos →</a>
           </div>
           <div class="row g-3">
             <?php foreach ($logros as [$ico, $nom, $ok]): ?>

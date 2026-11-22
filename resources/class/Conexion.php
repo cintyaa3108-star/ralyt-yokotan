@@ -8,7 +8,7 @@ class Conexion
     private const HOST = 'localhost';
     private const BD   = 'ralyt';
     private const USER = 'root';
-    private const PASS = '';
+    private const PASS = 'yuri2005';
 
     private static ?PDO $pdo = null;
 

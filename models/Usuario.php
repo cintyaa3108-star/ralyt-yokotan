@@ -40,4 +40,25 @@ class Usuario
                       ultima_actividad = ? WHERE id = ?')->execute([$pts, $hoy, $ayer, $hoy, $uid]);
         $db->prepare('INSERT INTO actividad (usuario_id, descripcion, puntos) VALUES (?, ?, ?)')->execute([$uid, $desc, $pts]);
     }
+
+    public static function actualizarNombre(int $uid, string $nombre): void {
+        Conexion::get()->prepare('UPDATE usuarios SET nombre = ? WHERE id = ?')->execute([$nombre, $uid]);
+    }
+
+    public static function cambiarPassword(int $uid, string $password): void {
+        Conexion::get()->prepare('UPDATE usuarios SET password_hash = ? WHERE id = ?')
+            ->execute([password_hash($password, PASSWORD_DEFAULT), $uid]);
+    }
+
+    /** Últimos movimientos del historial (perfil). */
+    public static function actividad(int $uid, int $limite = 10): array {
+        $q = Conexion::get()->prepare('SELECT descripcion, puntos, fecha FROM actividad WHERE usuario_id = ? ORDER BY fecha DESC, id DESC LIMIT ' . $limite);
+        $q->execute([$uid]);
+        return $q->fetchAll();
+    }
+
+    /** Borra la cuenta; el progreso, el historial y los cuentos leídos se eliminan solos (ON DELETE CASCADE). */
+    public static function eliminar(int $uid): void {
+        Conexion::get()->prepare('DELETE FROM usuarios WHERE id = ?')->execute([$uid]);
+    }
 }

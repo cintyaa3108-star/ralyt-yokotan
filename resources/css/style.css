@@ -239,6 +239,7 @@ audio { width: 100%; }
 .palabra { border-bottom: 2px dotted var(--r-orange); cursor: pointer; }
 .palabra:hover, .palabra:focus { background: rgba(224, 138, 62, .2); outline: none; }
 .texto-cuento { font-size: 1.35rem; line-height: 2.2; }
+.rl-sonido:disabled { opacity: .4; }
 
 .texto-cuento .palabra {
     border-bottom: 2px dotted #a85b2a;
