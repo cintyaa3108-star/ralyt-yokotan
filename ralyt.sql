@@ -11,7 +11,7 @@
  Target Server Version : 120303 (12.3.3-MariaDB)
  File Encoding         : 65001
 
- Date: 16/11/2026 14:20:43
+ Date: 22/11/2026 22:26:53
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `actividad`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_act_usr`(`usuario_id`, `fecha`) USING BTREE,
   CONSTRAINT `fk_act_usr` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_uca1400_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_uca1400_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of actividad
@@ -61,6 +61,9 @@ INSERT INTO `actividad` VALUES (23, 3, 'Lección completada: Animales terrestres
 INSERT INTO `actividad` VALUES (24, 3, 'Lección completada: Despedidas', 20, '2026-11-16 10:31:52');
 INSERT INTO `actividad` VALUES (25, 3, 'Lección completada: Saludos', 20, '2026-11-16 10:31:52');
 INSERT INTO `actividad` VALUES (41, 3, 'Leíste: La tortuguita y la lluvia', 20, '2026-11-16 13:54:19');
+INSERT INTO `actividad` VALUES (42, 3, 'Nivel 3: Contar personas y animales', 30, '2026-11-22 21:14:02');
+INSERT INTO `actividad` VALUES (43, 3, 'Nivel 3: Comida', 30, '2026-11-22 21:14:16');
+INSERT INTO `actividad` VALUES (44, 3, 'Nivel 1: Números', 20, '2026-11-22 21:48:55');
 
 -- ----------------------------
 -- Table structure for categorias
@@ -217,7 +220,7 @@ CREATE TABLE `lecciones`  (
   INDEX `fk_lec_cat`(`categoria_id`) USING BTREE,
   CONSTRAINT `fk_lec_cat` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `fk_lec_nivel` FOREIGN KEY (`nivel_id`) REFERENCES `niveles` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_uca1400_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_uca1400_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lecciones
@@ -227,17 +230,18 @@ INSERT INTO `lecciones` VALUES (2, 1, 2, 'Despedidas', 2);
 INSERT INTO `lecciones` VALUES (3, 1, 3, 'Pronombres', 3);
 INSERT INTO `lecciones` VALUES (4, 1, 5, 'Partes del cuerpo humano', 5);
 INSERT INTO `lecciones` VALUES (5, 1, 7, 'Colores', 10);
-INSERT INTO `lecciones` VALUES (6, 1, 9, 'Parentesco', 16);
 INSERT INTO `lecciones` VALUES (7, 1, 16, 'Animales terrestres', 12);
 INSERT INTO `lecciones` VALUES (8, 2, 1, 'Saludos', 1);
 INSERT INTO `lecciones` VALUES (9, 2, 2, 'Despedidas', 2);
 INSERT INTO `lecciones` VALUES (10, 2, 3, 'Pronombres', 3);
 INSERT INTO `lecciones` VALUES (11, 2, 5, 'Partes del cuerpo humano', 5);
 INSERT INTO `lecciones` VALUES (12, 2, 7, 'Colores', 10);
-INSERT INTO `lecciones` VALUES (13, 2, 9, 'Parentesco', 16);
 INSERT INTO `lecciones` VALUES (14, 2, 16, 'Animales terrestres', 12);
 INSERT INTO `lecciones` VALUES (15, 3, 2, 'Despedidas', 2);
 INSERT INTO `lecciones` VALUES (16, 3, 1, 'Saludos', 1);
+INSERT INTO `lecciones` VALUES (17, 3, 12, 'Comida', 19);
+INSERT INTO `lecciones` VALUES (18, 3, 15, 'Contar personas y animales', 9);
+INSERT INTO `lecciones` VALUES (21, 1, 14, 'Números', 6);
 
 -- ----------------------------
 -- Table structure for letras
@@ -259,33 +263,33 @@ CREATE TABLE `letras`  (
 -- Records of letras
 -- ----------------------------
 INSERT INTO `letras` VALUES (1, 'a', 'vocal', 'alás', 'Juguete', NULL, 1);
-INSERT INTO `letras` VALUES (2, 'b', 'consonante', NULL, NULL, NULL, 2);
-INSERT INTO `letras` VALUES (3, 'ch', 'consonante', NULL, NULL, NULL, 3);
-INSERT INTO `letras` VALUES (4, 'd', 'consonante', NULL, NULL, NULL, 4);
+INSERT INTO `letras` VALUES (2, 'b', 'consonante', 'Buch\'', 'Mojarra', NULL, 2);
+INSERT INTO `letras` VALUES (3, 'ch', 'consonante', 'Chitam', 'Cerdo', NULL, 3);
+INSERT INTO `letras` VALUES (4, 'd', 'consonante', 'Dios', 'Saludo', NULL, 4);
 INSERT INTO `letras` VALUES (5, 'e', 'vocal', 'ek\'', 'Estrella', NULL, 5);
 INSERT INTO `letras` VALUES (6, 'i', 'vocal', 'ich', 'Chile', NULL, 6);
-INSERT INTO `letras` VALUES (7, 'j', 'consonante', NULL, NULL, NULL, 7);
-INSERT INTO `letras` VALUES (8, 'k', 'consonante', NULL, NULL, NULL, 8);
-INSERT INTO `letras` VALUES (9, 'l', 'consonante', NULL, NULL, NULL, 9);
-INSERT INTO `letras` VALUES (10, 'm', 'consonante', NULL, NULL, NULL, 10);
-INSERT INTO `letras` VALUES (11, 'n', 'consonante', NULL, NULL, NULL, 11);
+INSERT INTO `letras` VALUES (7, 'j', 'consonante', 'Ja\'', 'Agua', NULL, 7);
+INSERT INTO `letras` VALUES (8, 'k', 'consonante', 'K\'in', 'Sol / Día', NULL, 8);
+INSERT INTO `letras` VALUES (9, 'l', 'consonante', 'Lukum', 'Lombriz', NULL, 9);
+INSERT INTO `letras` VALUES (10, 'm', 'consonante', 'Mut', 'Pájaro', NULL, 10);
+INSERT INTO `letras` VALUES (11, 'n', 'consonante', 'Na\'', 'Mamá', NULL, 11);
 INSERT INTO `letras` VALUES (12, 'o', 'vocal', 'oj', 'Caña', NULL, 12);
-INSERT INTO `letras` VALUES (13, 'p', 'consonante', NULL, NULL, NULL, 13);
-INSERT INTO `letras` VALUES (14, 'r', 'consonante', NULL, NULL, NULL, 14);
-INSERT INTO `letras` VALUES (15, 's', 'consonante', NULL, NULL, NULL, 15);
-INSERT INTO `letras` VALUES (16, 't', 'consonante', NULL, NULL, NULL, 16);
+INSERT INTO `letras` VALUES (13, 'p', 'consonante', 'Piyó', 'Pollo', NULL, 13);
+INSERT INTO `letras` VALUES (14, 'r', 'consonante', 'Ichir', 'En chirimol', NULL, 14);
+INSERT INTO `letras` VALUES (15, 's', 'consonante', 'Sak', 'Blanco', NULL, 15);
+INSERT INTO `letras` VALUES (16, 't', 'consonante', 'Tuch', 'Ombligo', NULL, 16);
 INSERT INTO `letras` VALUES (17, 'u', 'vocal', 'uch', 'Zorro', NULL, 17);
-INSERT INTO `letras` VALUES (18, 'ts', 'consonante', NULL, NULL, NULL, 18);
-INSERT INTO `letras` VALUES (19, 'w', 'consonante', NULL, NULL, NULL, 19);
-INSERT INTO `letras` VALUES (20, 'x', 'consonante', NULL, NULL, NULL, 20);
-INSERT INTO `letras` VALUES (21, 'y', 'consonante', NULL, NULL, NULL, 21);
+INSERT INTO `letras` VALUES (18, 'ts', 'consonante', 'Ts\'i\'', 'Perro', NULL, 18);
+INSERT INTO `letras` VALUES (19, 'w', 'consonante', 'Waj', 'Tortilla', NULL, 19);
+INSERT INTO `letras` VALUES (20, 'x', 'consonante', 'Xik\'', 'Ala', NULL, 20);
+INSERT INTO `letras` VALUES (21, 'y', 'consonante', 'Yiník', 'Hombre', NULL, 21);
 INSERT INTO `letras` VALUES (22, 'ɨ', 'vocal', 'ɨlɨk\'i', 'Animales', NULL, 22);
-INSERT INTO `letras` VALUES (23, 'a\'a', 'vocal_quebrada', NULL, NULL, NULL, 101);
-INSERT INTO `letras` VALUES (24, 'e\'e', 'vocal_quebrada', NULL, NULL, NULL, 102);
-INSERT INTO `letras` VALUES (25, 'i\'i', 'vocal_quebrada', NULL, NULL, NULL, 103);
-INSERT INTO `letras` VALUES (26, 'o\'o', 'vocal_quebrada', NULL, NULL, NULL, 104);
-INSERT INTO `letras` VALUES (27, 'u\'u', 'vocal_quebrada', NULL, NULL, NULL, 105);
-INSERT INTO `letras` VALUES (28, 'ɨ\'ɨ', 'vocal_quebrada', NULL, NULL, NULL, 106);
+INSERT INTO `letras` VALUES (23, 'a\'a', 'vocal_quebrada', 'Ja\'as', 'Plátano', NULL, 101);
+INSERT INTO `letras` VALUES (24, 'e\'e', 'vocal_quebrada', 'Ch\'e\'en', 'Pozo', NULL, 102);
+INSERT INTO `letras` VALUES (25, 'i\'i', 'vocal_quebrada', 'Pi\'ix', 'Rodilla', NULL, 103);
+INSERT INTO `letras` VALUES (26, 'o\'o', 'vocal_quebrada', 'Jo\'och', 'Cosecha', NULL, 104);
+INSERT INTO `letras` VALUES (27, 'u\'u', 'vocal_quebrada', 'Bu\'ul', 'Frijol', NULL, 105);
+INSERT INTO `letras` VALUES (28, 'ɨ\'ɨ', 'vocal_quebrada', 'K\'ɨ\'ɨb', 'Cera', NULL, 106);
 
 -- ----------------------------
 -- Table structure for niveles
@@ -317,7 +321,7 @@ CREATE TABLE `palabras`  (
   `yokotan` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `espanol` varchar(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci NOT NULL,
   `tipo` enum('palabra','frase') CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci NOT NULL DEFAULT 'palabra',
-  `audio` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci NULL DEFAULT NULL,
+  `audio` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci NULL DEFAULT NULL,
   `imagen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci NULL DEFAULT NULL,
   `nota` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci NULL DEFAULT NULL,
   `orden` smallint(6) NOT NULL DEFAULT 0,
@@ -325,110 +329,107 @@ CREATE TABLE `palabras`  (
   UNIQUE INDEX `uq_palabra`(`categoria_id`, `yokotan`) USING BTREE,
   INDEX `idx_espanol`(`espanol`) USING BTREE,
   CONSTRAINT `fk_pal_cat` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 221 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_uca1400_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 244 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_uca1400_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of palabras
 -- ----------------------------
-INSERT INTO `palabras` VALUES (1, 1, 'Uts a julet-la', 'Bienvenidos', 'frase', NULL, 'bienvenidos.png', NULL, 1);
-INSERT INTO `palabras` VALUES (2, 1, 'Uts k\'in', 'Buenos días', 'frase', NULL, 'buenosdias.png', NULL, 2);
-INSERT INTO `palabras` VALUES (3, 1, 'Uts k\'in aj ye\'jun', 'Buenos días maestro', 'frase', NULL, 'buenosdiasmaestro.png', NULL, 3);
-INSERT INTO `palabras` VALUES (4, 1, 'Uts k\'in aj kɨnjun', 'Buenos días alumnos', 'frase', NULL, 'buenosdiasalumnos.png', NULL, 4);
-INSERT INTO `palabras` VALUES (5, 1, 'Uts tɨnxin k\'in', 'Buenas tardes', 'frase', NULL, 'buenastardes.png', NULL, 5);
-INSERT INTO `palabras` VALUES (6, 1, 'Uts ak\'ɨb', 'Buenas noches', 'frase', NULL, 'buenasnoches.png', NULL, 6);
-INSERT INTO `palabras` VALUES (7, 2, 'Dali kubila', 'Nos vemos', 'frase', NULL, 'nosvemos.png', NULL, 1);
-INSERT INTO `palabras` VALUES (8, 2, 'Ik\'ɨto', 'Hasta mañana', 'frase', NULL, 'hastamanana.png', NULL, 2);
-INSERT INTO `palabras` VALUES (9, 2, 'Dali kɨ chine kɨbala', 'Nos vemos después', 'frase', NULL, 'nosvemosdespues.png', NULL, 3);
-INSERT INTO `palabras` VALUES (10, 2, 'Uts a bixe\'', 'Que te vaya bien', 'frase', NULL, 'quetevayabien.png', NULL, 4);
-INSERT INTO `palabras` VALUES (11, 2, 'Kɨrintanaba', 'Cuídate', 'frase', NULL, 'cuidate.png', NULL, 5);
-INSERT INTO `palabras` VALUES (12, 2, 'T\'o kɨ papla a bixe', 'Ve con Dios', 'frase', NULL, 'vecondios.png', NULL, 6);
-INSERT INTO `palabras` VALUES (13, 2, 'K\'adios', 'Gracias', 'frase', NULL, 'gracias.png', NULL, 7);
-INSERT INTO `palabras` VALUES (14, 2, 'Dalito', 'Nos vemos más tarde', 'frase', NULL, 'nosvemosmastarde.png', NULL, 8);
+INSERT INTO `palabras` VALUES (1, 1, 'Uts a julet-la', 'Bienvenidos', 'frase', 'Bienvenidos.mp4', 'bienvenidos.png', NULL, 1);
+INSERT INTO `palabras` VALUES (2, 1, 'Uts k\'in', 'Buenos días', 'frase', 'Buenosdias.mp4', 'buenosdias.png', NULL, 2);
+INSERT INTO `palabras` VALUES (3, 1, 'Uts k\'in aj ye\'jun', 'Buenos días maestro', 'frase', 'Buenosdiasmaestro.mp4', 'buenosdiasmaestro.png', NULL, 3);
+INSERT INTO `palabras` VALUES (5, 1, 'Uts tɨnxin k\'in', 'Buenas tardes', 'frase', 'BuenasTardes.mp4', 'buenastardes.png', NULL, 5);
+INSERT INTO `palabras` VALUES (7, 2, 'Dali kubila', 'Nos vemos', 'frase', 'Nosvemos.mp4', 'nosvemos.png', NULL, 1);
+INSERT INTO `palabras` VALUES (8, 2, 'Ik\'ɨto', 'Hasta mañana', 'frase', 'HastaManana.mp4', 'hastamanana.png', NULL, 2);
+INSERT INTO `palabras` VALUES (9, 2, 'Dali kɨ chine kɨbala', 'Nos vemos después', 'frase', 'NosVemosDespues.mp4', 'nosvemosdespues.png', NULL, 3);
+INSERT INTO `palabras` VALUES (10, 2, 'Uts a bixe\'', 'Que te vaya bien', 'frase', 'Quetevayabien.mp4', 'quetevayabien.png', NULL, 4);
+INSERT INTO `palabras` VALUES (11, 2, 'Kɨrintanaba', 'Cuídate', 'frase', 'Cuidate.mp4', 'cuidate.png', NULL, 5);
+INSERT INTO `palabras` VALUES (13, 2, 'K\'adios', 'Gracias', 'frase', 'Gracias.mp4', 'gracias.png', NULL, 7);
+INSERT INTO `palabras` VALUES (14, 2, 'Dalito', 'Nos vemos más tarde', 'frase', 'Nosvemosmastarde.mp4', 'nosvemosmastarde.png', NULL, 8);
 INSERT INTO `palabras` VALUES (15, 3, 'kɨne', 'Yo', 'palabra', NULL, 'yo.png', NULL, 1);
-INSERT INTO `palabras` VALUES (16, 3, 'Ane', 'Tú', 'palabra', NULL, 'tu.png', NULL, 2);
+INSERT INTO `palabras` VALUES (16, 3, 'Ane', 'Tú', 'palabra', 'Tu.mp4', 'tu.png', NULL, 2);
 INSERT INTO `palabras` VALUES (17, 3, 'Une', 'Él/Ella', 'palabra', NULL, 'elella.png', NULL, 3);
-INSERT INTO `palabras` VALUES (18, 3, 'Kɨnela', 'Nosotros', 'palabra', NULL, 'nosotros.png', NULL, 4);
-INSERT INTO `palabras` VALUES (19, 3, 'Anela', 'Ustedes', 'palabra', NULL, 'ustedes.png', NULL, 5);
-INSERT INTO `palabras` VALUES (20, 3, 'Unejob', 'Ellos/Ellas', 'palabra', NULL, 'ellosellas.png', NULL, 6);
+INSERT INTO `palabras` VALUES (18, 3, 'Kɨnela', 'Nosotros', 'palabra', 'Nosotros.mp4', 'nosotros.png', NULL, 4);
+INSERT INTO `palabras` VALUES (19, 3, 'Anela', 'Ustedes', 'palabra', 'Ustedes.mp4', 'ustedes.png', NULL, 5);
+INSERT INTO `palabras` VALUES (20, 3, 'Unejob', 'Ellos/Ellas', 'palabra', 'EllosEllas.mp4', 'ellosellas.png', NULL, 6);
 INSERT INTO `palabras` VALUES (21, 4, 'Kɨ', 'Mío', 'palabra', NULL, NULL, NULL, 1);
 INSERT INTO `palabras` VALUES (22, 4, 'a', 'Tuyo', 'palabra', NULL, NULL, NULL, 2);
 INSERT INTO `palabras` VALUES (23, 4, 'u', 'Suyo', 'palabra', NULL, NULL, NULL, 3);
-INSERT INTO `palabras` VALUES (24, 5, 'Pam', 'Cabeza', 'palabra', NULL, 'cabeza.png', NULL, 1);
-INSERT INTO `palabras` VALUES (25, 5, 'Ti\' pám', 'Frente', 'palabra', NULL, 'frente.png', NULL, 2);
-INSERT INTO `palabras` VALUES (26, 5, 'Tsuk', 'Cabello', 'palabra', NULL, 'cabello.png', NULL, 3);
-INSERT INTO `palabras` VALUES (27, 5, 'Tsutsjút', 'Ceja', 'palabra', NULL, 'ceja.png', NULL, 4);
-INSERT INTO `palabras` VALUES (28, 5, 'Jut', 'Ojo', 'palabra', NULL, 'ojo.png', NULL, 5);
-INSERT INTO `palabras` VALUES (29, 5, 'Ni\'', 'Nariz', 'palabra', NULL, 'nariz.png', NULL, 6);
-INSERT INTO `palabras` VALUES (30, 5, 'Ti\'', 'Boca', 'palabra', NULL, 'boca.png', NULL, 7);
-INSERT INTO `palabras` VALUES (31, 5, 'Pechkem', 'Hombro', 'palabra', NULL, 'hombro.png', NULL, 8);
-INSERT INTO `palabras` VALUES (32, 5, 'Chu\'', 'Busto', 'palabra', NULL, 'busto.png', NULL, 9);
-INSERT INTO `palabras` VALUES (33, 5, 'Miku', 'Axila', 'palabra', NULL, 'axila.png', NULL, 10);
-INSERT INTO `palabras` VALUES (34, 5, 'Luk\'ub', 'Cuello', 'palabra', NULL, 'cuello.png', NULL, 11);
-INSERT INTO `palabras` VALUES (35, 5, 'Muk', 'Ombligo', 'palabra', NULL, 'ombligo.png', NULL, 12);
-INSERT INTO `palabras` VALUES (36, 5, 'Nɨk\'', 'Estómago', 'palabra', NULL, 'estomago.png', NULL, 13);
-INSERT INTO `palabras` VALUES (37, 5, 'Chikin', 'Oreja', 'palabra', NULL, 'oreja.png', NULL, 14);
-INSERT INTO `palabras` VALUES (38, 5, 'Choj', 'Mejilla', 'palabra', NULL, 'mejilla.png', NULL, 15);
-INSERT INTO `palabras` VALUES (39, 5, 'Ok', 'Pie', 'palabra', NULL, 'pie.png', NULL, 16);
-INSERT INTO `palabras` VALUES (40, 5, 'Wok', 'Pierna', 'palabra', NULL, 'pierna.png', NULL, 17);
-INSERT INTO `palabras` VALUES (41, 5, 'Pix', 'Rodilla', 'palabra', NULL, 'rodilla.png', NULL, 18);
-INSERT INTO `palabras` VALUES (42, 5, 'Ni\'ok', 'Dedos del pie', 'palabra', NULL, 'dedosdelpie.png', NULL, 19);
-INSERT INTO `palabras` VALUES (43, 5, 'Tun ok', 'Talón', 'palabra', NULL, 'talon.png', NULL, 20);
+INSERT INTO `palabras` VALUES (24, 5, 'Pam', 'Cabeza', 'palabra', 'Cabeza.mp4', 'cabeza.png', NULL, 1);
+INSERT INTO `palabras` VALUES (25, 5, 'Ti\' pám', 'Frente', 'palabra', 'Frente.mp4', 'frente.png', NULL, 2);
+INSERT INTO `palabras` VALUES (26, 5, 'Tsuk', 'Cabello', 'palabra', 'Cabello.mp4', 'cabello.png', NULL, 3);
+INSERT INTO `palabras` VALUES (27, 5, 'Tsutsjút', 'Ceja', 'palabra', 'Ceja.mp4', 'ceja.png', NULL, 4);
+INSERT INTO `palabras` VALUES (28, 5, 'Jut', 'Ojo', 'palabra', 'Ojo.mp4', 'ojo.png', NULL, 5);
+INSERT INTO `palabras` VALUES (29, 5, 'Ni\'', 'Nariz', 'palabra', 'Nariz.mp4', 'nariz.png', NULL, 6);
+INSERT INTO `palabras` VALUES (30, 5, 'Ti\'', 'Boca', 'palabra', 'Boca.mp4', 'boca.png', NULL, 7);
+INSERT INTO `palabras` VALUES (31, 5, 'Pechkem', 'Hombro', 'palabra', 'Hombro.mp4', 'hombro.png', NULL, 8);
+INSERT INTO `palabras` VALUES (32, 5, 'Chu\'', 'Busto', 'palabra', 'Busto.mp4', 'busto.png', NULL, 9);
+INSERT INTO `palabras` VALUES (33, 5, 'Miku', 'Axila', 'palabra', 'Axila.mp4', 'axila.png', NULL, 10);
+INSERT INTO `palabras` VALUES (34, 5, 'Luk\'ub', 'Cuello', 'palabra', 'Cuello.mp4', 'cuello.png', NULL, 11);
+INSERT INTO `palabras` VALUES (35, 5, 'Muk', 'Ombligo', 'palabra', 'Ombligo.mp4', 'ombligo.png', NULL, 12);
+INSERT INTO `palabras` VALUES (36, 5, 'Nɨk\'', 'Estómago', 'palabra', 'Estomago.mp4', 'estomago.png', NULL, 13);
+INSERT INTO `palabras` VALUES (37, 5, 'Chikin', 'Oreja', 'palabra', 'Oreja.mp4', 'oreja.png', NULL, 14);
+INSERT INTO `palabras` VALUES (38, 5, 'Choj', 'Mejilla', 'palabra', 'Mejilla.mp4', 'mejilla.png', NULL, 15);
+INSERT INTO `palabras` VALUES (39, 5, 'Ok', 'Pie', 'palabra', 'Pie.mp4', 'pie.png', NULL, 16);
+INSERT INTO `palabras` VALUES (40, 5, 'Wok', 'Pierna', 'palabra', 'Pierna.mp4', 'pierna.png', NULL, 17);
+INSERT INTO `palabras` VALUES (41, 5, 'Pix', 'Rodilla', 'palabra', 'Rodilla.mp4', 'rodilla.png', NULL, 18);
+INSERT INTO `palabras` VALUES (42, 5, 'Ni\'ok', 'Dedos del pie', 'palabra', 'DedosdelPie.mp4', 'dedosdelpie.png', NULL, 19);
+INSERT INTO `palabras` VALUES (43, 5, 'Tun ok', 'Talón', 'palabra', 'Talon.mp4', 'talon.png', NULL, 20);
 INSERT INTO `palabras` VALUES (44, 5, 'Ta\'ok', 'Pantorilla', 'palabra', NULL, NULL, NULL, 21);
-INSERT INTO `palabras` VALUES (45, 5, 'Ni\' k\'ɨb', 'Dedos de las manos', 'palabra', NULL, 'dedodelasmanos.png', NULL, 22);
-INSERT INTO `palabras` VALUES (46, 5, 'Ich\'ɨk', 'Uñas', 'palabra', NULL, 'uñas.png', NULL, 23);
+INSERT INTO `palabras` VALUES (45, 5, 'Ni\' k\'ɨb', 'Dedos de las manos', 'palabra', 'DedoDelasManos.mp4', 'dedodelasmanos.png', NULL, 22);
+INSERT INTO `palabras` VALUES (46, 5, 'Ich\'ɨk', 'Uñas', 'palabra', 'Unas.mp4', 'uñas.png', NULL, 23);
 INSERT INTO `palabras` VALUES (47, 13, 'Un', 'Uno', 'palabra', NULL, NULL, NULL, 1);
 INSERT INTO `palabras` VALUES (48, 13, 'Cha\'', 'Dos', 'palabra', NULL, NULL, NULL, 2);
 INSERT INTO `palabras` VALUES (49, 13, 'Ux', 'Tres', 'palabra', NULL, 'ganado.png', NULL, 3);
 INSERT INTO `palabras` VALUES (50, 13, 'Chɨn', 'Cuatro', 'palabra', NULL, NULL, NULL, 4);
 INSERT INTO `palabras` VALUES (51, 13, 'Jon', 'Cinco', 'palabra', NULL, NULL, NULL, 5);
-INSERT INTO `palabras` VALUES (52, 14, 'Unp\'e', 'Uno', 'palabra', NULL, NULL, NULL, 1);
-INSERT INTO `palabras` VALUES (53, 14, 'Cha\'p\'e', 'Dos', 'palabra', NULL, NULL, NULL, 2);
-INSERT INTO `palabras` VALUES (54, 14, 'Uxp\'e', 'Tres', 'palabra', NULL, 'ganado.png', NULL, 3);
-INSERT INTO `palabras` VALUES (55, 14, 'Chɨnp\'e', 'Cuatro', 'palabra', NULL, NULL, NULL, 4);
-INSERT INTO `palabras` VALUES (56, 14, 'Jonp\'e', 'Cinco', 'palabra', NULL, NULL, NULL, 5);
+INSERT INTO `palabras` VALUES (52, 14, 'Unp\'e', 'Uno', 'palabra', 'uno.mp4', 'uno.png', NULL, 1);
+INSERT INTO `palabras` VALUES (53, 14, 'Cha\'p\'e', 'Dos', 'palabra', 'dos.mp4', 'dos.png', NULL, 2);
+INSERT INTO `palabras` VALUES (54, 14, 'Uxp\'e', 'Tres', 'palabra', 'tres.mp4', 'tres.png', NULL, 3);
+INSERT INTO `palabras` VALUES (55, 14, 'Chɨnp\'e', 'Cuatro', 'palabra', 'cuatro.mp4', 'cuatro.png', NULL, 4);
+INSERT INTO `palabras` VALUES (56, 14, 'Jonp\'e', 'Cinco', 'palabra', 'cinco.mp4', 'cinco.png', NULL, 5);
 INSERT INTO `palabras` VALUES (57, 15, 'Untú Yiník', 'Un hombre', 'palabra', NULL, NULL, NULL, 1);
 INSERT INTO `palabras` VALUES (58, 15, 'Chatú Ixík', 'Una mujer', 'palabra', NULL, NULL, NULL, 2);
 INSERT INTO `palabras` VALUES (59, 15, 'Uxtú Yichu\'', 'Tres perros', 'palabra', NULL, 'perro.png', NULL, 3);
 INSERT INTO `palabras` VALUES (60, 15, 'Chɨntú Mut', 'Cuatro pájaros', 'palabra', NULL, NULL, NULL, 4);
 INSERT INTO `palabras` VALUES (61, 15, 'Jontú Juts\'', 'Cinco lagartos', 'palabra', NULL, NULL, NULL, 5);
-INSERT INTO `palabras` VALUES (62, 7, 'Sɨk', 'Blanco', 'palabra', NULL, 'blanco.png', NULL, 1);
-INSERT INTO `palabras` VALUES (63, 7, 'Chɨk', 'Rojo', 'palabra', NULL, 'rojo.png', NULL, 2);
-INSERT INTO `palabras` VALUES (64, 7, 'Ik\'', 'Negro', 'palabra', NULL, 'negro.png', NULL, 3);
-INSERT INTO `palabras` VALUES (65, 7, 'Yɨx', 'Verde', 'palabra', NULL, 'verde.png', 'En el documento estaba escrito al revés (español: yokot\'an); se corrigió el orden', 4);
-INSERT INTO `palabras` VALUES (66, 7, 'K\'ɨnpakan', 'Amarillo', 'palabra', NULL, 'amarillo.png', NULL, 5);
-INSERT INTO `palabras` VALUES (67, 7, 'K\'ɨntajan', 'Naranja', 'palabra', NULL, 'naranja.png', NULL, 6);
-INSERT INTO `palabras` VALUES (68, 7, 'Yɨxulan', 'Azul', 'palabra', NULL, 'azul.png', NULL, 7);
+INSERT INTO `palabras` VALUES (62, 7, 'Sɨk', 'Blanco', 'palabra', 'Blanco.mp4', 'blanco.png', NULL, 1);
+INSERT INTO `palabras` VALUES (63, 7, 'Chɨk', 'Rojo', 'palabra', 'Rojo.mp4', 'rojo.png', NULL, 2);
+INSERT INTO `palabras` VALUES (64, 7, 'Ik\'', 'Negro', 'palabra', 'Negro.mp4', 'negro.png', NULL, 3);
+INSERT INTO `palabras` VALUES (65, 7, 'Yɨx', 'Verde', 'palabra', 'Verde.mp4', 'verde.png', 'En el documento estaba escrito al revés (español: yokot\'an); se corrigió el orden', 4);
+INSERT INTO `palabras` VALUES (66, 7, 'K\'ɨnpakan', 'Amarillo', 'palabra', 'Amarillo.mp4', 'amarillo.png', NULL, 5);
+INSERT INTO `palabras` VALUES (67, 7, 'K\'ɨntajan', 'Naranja', 'palabra', 'Naranja.mp4', 'naranja.png', NULL, 6);
+INSERT INTO `palabras` VALUES (68, 7, 'Yɨxulan', 'Azul', 'palabra', 'Azul.mp4', 'azul.png', NULL, 7);
 INSERT INTO `palabras` VALUES (69, 7, 'Ik\'buk\'an', 'Morado', 'palabra', NULL, 'morado.png', NULL, 8);
-INSERT INTO `palabras` VALUES (70, 7, 'Ik\' bujan', 'Café', 'palabra', NULL, 'cafe.png', NULL, 9);
-INSERT INTO `palabras` VALUES (71, 7, 'Poschɨk', 'Rosa', 'palabra', NULL, 'rosa.png', NULL, 10);
-INSERT INTO `palabras` VALUES (72, 7, 'Tsɨtsɨ ik\'', 'Gris', 'palabra', NULL, 'gris.png', NULL, 11);
-INSERT INTO `palabras` VALUES (73, 16, 'Yichu\'', 'Perro', 'palabra', NULL, 'perro.png', NULL, 1);
-INSERT INTO `palabras` VALUES (74, 16, 'Much', 'Sapo', 'palabra', NULL, 'sapo.png', NULL, 2);
-INSERT INTO `palabras` VALUES (75, 16, 'Mis', 'Gato', 'palabra', NULL, 'gato.png', NULL, 3);
-INSERT INTO `palabras` VALUES (76, 16, 'Chimay', 'Venado', 'palabra', NULL, 'venado.png', NULL, 4);
-INSERT INTO `palabras` VALUES (77, 16, 'Tsimín', 'Caballo', 'palabra', NULL, 'caballo.png', NULL, 5);
-INSERT INTO `palabras` VALUES (78, 16, 'Balúm', 'Tigre', 'palabra', NULL, 'tigre.png', NULL, 6);
-INSERT INTO `palabras` VALUES (79, 16, 'Pum', 'Mono', 'palabra', NULL, 'mono.png', NULL, 7);
-INSERT INTO `palabras` VALUES (80, 16, 'Piyo\'', 'Pollo', 'palabra', NULL, 'pollo.png', NULL, 8);
-INSERT INTO `palabras` VALUES (81, 16, 'Patu\'', 'Pato', 'palabra', NULL, 'pato.png', NULL, 9);
-INSERT INTO `palabras` VALUES (82, 16, 'Mulu\'', 'Pavo', 'palabra', NULL, 'pavo.png', NULL, 10);
-INSERT INTO `palabras` VALUES (83, 16, 'Tsuk', 'Rata', 'palabra', NULL, 'rata.png', NULL, 11);
-INSERT INTO `palabras` VALUES (84, 16, 'Chitam', 'Puerco', 'palabra', NULL, 'puerco.png', NULL, 12);
-INSERT INTO `palabras` VALUES (85, 16, 'Te\'le yichu\'', 'Lobo', 'palabra', NULL, 'lobo.png', NULL, 13);
-INSERT INTO `palabras` VALUES (86, 16, 'Te\'le chitam', 'Jabalí', 'palabra', NULL, 'jabali.png', NULL, 14);
+INSERT INTO `palabras` VALUES (70, 7, 'Ik\' bujan', 'Café', 'palabra', 'Cafe.mp4', 'cafe.png', NULL, 9);
+INSERT INTO `palabras` VALUES (71, 7, 'Poschɨk', 'Rosa', 'palabra', 'Rosa.mp4', 'rosa.png', NULL, 10);
+INSERT INTO `palabras` VALUES (72, 7, 'Tsɨtsɨ ik\'', 'Gris', 'palabra', 'Gris.mp4', 'gris.png', NULL, 11);
+INSERT INTO `palabras` VALUES (73, 16, 'Yichu\'', 'Perro', 'palabra', 'Perro.mp4', 'perro.png', NULL, 1);
+INSERT INTO `palabras` VALUES (74, 16, 'Much', 'Sapo', 'palabra', 'Sapo.mp4', 'sapo.png', NULL, 2);
+INSERT INTO `palabras` VALUES (75, 16, 'Mis', 'Gato', 'palabra', 'Gato.mp4', 'gato.png', NULL, 3);
+INSERT INTO `palabras` VALUES (76, 16, 'Chimay', 'Venado', 'palabra', 'Venado.mp4', 'venado.png', NULL, 4);
+INSERT INTO `palabras` VALUES (77, 16, 'Tsimín', 'Caballo', 'palabra', 'Caballo.mp4', 'caballo.png', NULL, 5);
+INSERT INTO `palabras` VALUES (78, 16, 'Balúm', 'Tigre', 'palabra', 'Tigre.mp4', 'tigre.png', NULL, 6);
+INSERT INTO `palabras` VALUES (79, 16, 'Pum', 'Mono', 'palabra', 'Mono.mp4', 'mono.png', NULL, 7);
+INSERT INTO `palabras` VALUES (80, 16, 'Piyo\'', 'Pollo', 'palabra', 'Pollo.mp4', 'pollo.png', NULL, 8);
+INSERT INTO `palabras` VALUES (81, 16, 'Patu\'', 'Pato', 'palabra', 'Pato.mp4', 'pato.png', NULL, 9);
+INSERT INTO `palabras` VALUES (82, 16, 'Mulu\'', 'Pavo', 'palabra', 'Pavo.mp4', 'pavo.png', NULL, 10);
+INSERT INTO `palabras` VALUES (83, 16, 'Tsuk', 'Rata', 'palabra', 'Rata.mp4', 'rata.png', NULL, 11);
+INSERT INTO `palabras` VALUES (84, 16, 'Chitam', 'Puerco', 'palabra', 'Cerdo.mp4', 'puerco.png', NULL, 12);
+INSERT INTO `palabras` VALUES (85, 16, 'Te\'le yichu\'', 'Lobo', 'palabra', 'Lobo.mp4', 'lobo.png', NULL, 13);
+INSERT INTO `palabras` VALUES (86, 16, 'Te\'le chitam', 'Jabalí', 'palabra', 'Jabali.mp4', 'jabali.png', NULL, 14);
 INSERT INTO `palabras` VALUES (87, 16, 'Tensús', 'Borrego', 'palabra', NULL, 'oveja.png', NULL, 15);
-INSERT INTO `palabras` VALUES (88, 16, 'Chiku', 'Mapache', 'palabra', NULL, 'mapache.png', NULL, 16);
-INSERT INTO `palabras` VALUES (89, 16, 'Ibach', 'Armadillo', 'palabra', NULL, 'armadillo.png', NULL, 17);
-INSERT INTO `palabras` VALUES (90, 16, 'T\'ul', 'Conejo', 'palabra', NULL, 'conejo.png', NULL, 18);
-INSERT INTO `palabras` VALUES (91, 16, 'Chuch', 'Ardilla', 'palabra', NULL, 'ardilla.png', NULL, 19);
+INSERT INTO `palabras` VALUES (88, 16, 'Chiku', 'Mapache', 'palabra', 'Mapache.mp4', 'mapache.png', NULL, 16);
+INSERT INTO `palabras` VALUES (89, 16, 'Ibach', 'Armadillo', 'palabra', 'Armadillo.mp4', 'armadillo.png', NULL, 17);
+INSERT INTO `palabras` VALUES (90, 16, 'T\'ul', 'Conejo', 'palabra', 'Conejo.mp4', 'conejo.png', NULL, 18);
+INSERT INTO `palabras` VALUES (91, 16, 'Chuch', 'Ardilla', 'palabra', 'Ardilla.mp4', 'ardilla.png', NULL, 19);
 INSERT INTO `palabras` VALUES (92, 16, 'Tso\'', 'Pavo macho', 'palabra', NULL, 'pavomacho.png', NULL, 20);
 INSERT INTO `palabras` VALUES (93, 16, 'Chan', 'Serpiente', 'palabra', NULL, 'serpiente.png', NULL, 21);
 INSERT INTO `palabras` VALUES (94, 16, 'Yokochan', 'Nauyaka', 'palabra', NULL, 'nauyaka.png', NULL, 22);
-INSERT INTO `palabras` VALUES (95, 16, 'Mokoch', 'Boa', 'palabra', NULL, 'boa.png', NULL, 23);
-INSERT INTO `palabras` VALUES (96, 16, 'Bek\'et', 'Ganado', 'palabra', NULL, 'ganado.png', NULL, 24);
-INSERT INTO `palabras` VALUES (97, 16, 'Uch', 'Zorro', 'palabra', NULL, 'zorro.png', NULL, 25);
-INSERT INTO `palabras` VALUES (98, 16, 'Juj', 'Iguana', 'palabra', NULL, 'iguana.png', NULL, 26);
-INSERT INTO `palabras` VALUES (99, 16, 'Choj', 'Garrobo', 'palabra', NULL, 'garrobo.png', NULL, 27);
+INSERT INTO `palabras` VALUES (95, 16, 'Mokoch', 'Boa', 'palabra', 'Boa.mp4', 'boa.png', NULL, 23);
+INSERT INTO `palabras` VALUES (96, 16, 'Bek\'et', 'Ganado', 'palabra', 'Ganado.mp4', 'ganado.png', NULL, 24);
+INSERT INTO `palabras` VALUES (97, 16, 'Uch', 'Zorro', 'palabra', 'Zorro.mp4', 'zorro.png', NULL, 25);
+INSERT INTO `palabras` VALUES (98, 16, 'Juj', 'Iguana', 'palabra', 'Iguana.mp4', 'iguana.png', NULL, 26);
+INSERT INTO `palabras` VALUES (99, 16, 'Choj', 'Garrobo', 'palabra', 'Garrobo.mp4', 'garrobo.png', NULL, 27);
 INSERT INTO `palabras` VALUES (100, 17, 'Chech', 'Perico', 'palabra', NULL, NULL, NULL, 1);
 INSERT INTO `palabras` VALUES (101, 17, 'Chupitsaja', 'Colibrí', 'palabra', NULL, NULL, NULL, 2);
 INSERT INTO `palabras` VALUES (102, 17, 'T\'o\'', 'Garza', 'palabra', NULL, NULL, NULL, 3);
@@ -550,6 +551,16 @@ INSERT INTO `palabras` VALUES (217, 12, 'Ichir-ibám', 'Chirmol de pejelagarto',
 INSERT INTO `palabras` VALUES (218, 12, 'Ichirbuch\'', 'Chirmol de pescado', 'palabra', NULL, NULL, NULL, 36);
 INSERT INTO `palabras` VALUES (219, 12, 'Ichirpátu\'', 'Chirmol de pato', 'palabra', NULL, NULL, NULL, 37);
 INSERT INTO `palabras` VALUES (220, 12, 'Ichirpiyo\'', 'Chirmol de pollo', 'palabra', NULL, 'pollo.png', NULL, 38);
+INSERT INTO `palabras` VALUES (234, 15, 'Jontú juts\'', 'Cinco lagartos', 'frase', 'cincolagartos.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (235, 15, 'Un+tú yiník', 'Un hombre', 'frase', 'unhombre.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (236, 15, 'Chatú ixík', 'Dos mujeres', 'frase', 'dosmujeres.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (237, 15, 'Uxtú yichu\'', 'Tres perros', 'frase', 'tresperros.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (238, 15, 'Chintú mut', 'Cuatro pájaros', 'frase', 'cuatropajaros.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (239, 12, 'Ch\'at+r piyó', 'Pollo asado', 'frase', 'polloasado.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (240, 12, 'K\'ap piyó', 'Caldo de pollo', 'frase', 'caldodepollo.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (241, 12, 'Tsaj+\' buch\'', 'Mojarra frita', 'frase', 'mojarrafrita.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (242, 12, 'Popo\' ibam', 'Pejelagarto asado', 'frase', 'pejelagartoasado.mp4', NULL, NULL, 0);
+INSERT INTO `palabras` VALUES (243, 12, 'Ichir ibam', 'Pejelagarto en chirimol', 'frase', 'pejelagartoenchirimol.mp4', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for progreso
@@ -576,7 +587,6 @@ INSERT INTO `progreso` VALUES (2, 2, 1, 20, '2026-11-16 10:25:02');
 INSERT INTO `progreso` VALUES (2, 3, 1, 20, '2026-11-16 10:25:02');
 INSERT INTO `progreso` VALUES (2, 4, 1, 20, '2026-11-16 10:25:02');
 INSERT INTO `progreso` VALUES (2, 5, 1, 20, '2026-11-16 10:25:02');
-INSERT INTO `progreso` VALUES (2, 6, 1, 20, '2026-11-16 10:25:02');
 INSERT INTO `progreso` VALUES (2, 7, 1, 20, '2026-11-16 10:25:02');
 INSERT INTO `progreso` VALUES (2, 8, 1, 30, '2026-11-16 10:28:28');
 INSERT INTO `progreso` VALUES (3, 1, 1, 20, '2026-11-16 10:31:52');
@@ -584,17 +594,18 @@ INSERT INTO `progreso` VALUES (3, 2, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 3, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 4, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 5, 1, 20, '2026-11-16 10:31:52');
-INSERT INTO `progreso` VALUES (3, 6, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 7, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 8, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 9, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 10, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 11, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 12, 1, 20, '2026-11-16 10:31:52');
-INSERT INTO `progreso` VALUES (3, 13, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 14, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 15, 1, 20, '2026-11-16 10:31:52');
 INSERT INTO `progreso` VALUES (3, 16, 1, 20, '2026-11-16 10:31:52');
+INSERT INTO `progreso` VALUES (3, 17, 1, 30, '2026-11-22 21:14:16');
+INSERT INTO `progreso` VALUES (3, 18, 1, 30, '2026-11-22 21:14:02');
+INSERT INTO `progreso` VALUES (3, 21, 1, 20, '2026-11-22 21:48:55');
 
 -- ----------------------------
 -- Table structure for usuarios
@@ -621,7 +632,7 @@ CREATE TABLE `usuarios`  (
 -- ----------------------------
 INSERT INTO `usuarios` VALUES (1, 'Maria Torres Lopez', 'Mari12', 'maria@gmail.com', '$2y$10$T6Tq8r0mb05FArZkFFu9WuQMRNY2tLi7G8uxll/QTlHjMNu6HVpYW', NULL, 20, 1, '2026-11-16', '2026-11-16 10:08:39');
 INSERT INTO `usuarios` VALUES (2, 'María Hernández López', 'maria.h', 'maria.h@ralyt.test', '$6$ralytsalt12345$Dj/pB9gDRU8NMkDtQg6QYmqsSAe5JKXM5OXYAiKbbmyUDMePIKwQpQv0UE0NpJBQmhXlOHr7axcf/T2D1ZL9/.', NULL, 170, 1, '2026-11-16', '2026-11-16 10:23:27');
-INSERT INTO `usuarios` VALUES (3, 'José Pérez Castillo', 'jose.p', 'jose.p@ralyt.test', '$6$ralytsalt12345$Dj/pB9gDRU8NMkDtQg6QYmqsSAe5JKXM5OXYAiKbbmyUDMePIKwQpQv0UE0NpJBQmhXlOHr7axcf/T2D1ZL9/.', NULL, 340, 1, '2026-11-16', '2026-11-16 10:23:27');
+INSERT INTO `usuarios` VALUES (3, 'José Pérez Castillo', 'jose.p', 'jose.p@ralyt.test', '$6$ralytsalt12345$Dj/pB9gDRU8NMkDtQg6QYmqsSAe5JKXM5OXYAiKbbmyUDMePIKwQpQv0UE0NpJBQmhXlOHr7axcf/T2D1ZL9/.', 'resources/imagenes/avatares/u3_6fba602d6446.webp', 420, 1, '2026-11-22', '2026-11-16 10:23:27');
 INSERT INTO `usuarios` VALUES (4, 'Ana Sánchez Díaz', 'ana.s', 'ana.s@ralyt.test', '$6$ralytsalt12345$Dj/pB9gDRU8NMkDtQg6QYmqsSAe5JKXM5OXYAiKbbmyUDMePIKwQpQv0UE0NpJBQmhXlOHr7axcf/T2D1ZL9/.', NULL, 220, 2, '2026-11-16', '2026-11-16 10:23:27');
 INSERT INTO `usuarios` VALUES (5, 'Luis Ramírez Torres', 'luis.r', 'luis.r@ralyt.test', '$6$ralytsalt12345$Dj/pB9gDRU8NMkDtQg6QYmqsSAe5JKXM5OXYAiKbbmyUDMePIKwQpQv0UE0NpJBQmhXlOHr7axcf/T2D1ZL9/.', NULL, 180, 4, '2026-11-16', '2026-11-16 10:23:27');
 INSERT INTO `usuarios` VALUES (6, 'Carmen Gómez Vidal', 'carmen.g', 'carmen.g@ralyt.test', '$6$ralytsalt12345$Dj/pB9gDRU8NMkDtQg6QYmqsSAe5JKXM5OXYAiKbbmyUDMePIKwQpQv0UE0NpJBQmhXlOHr7axcf/T2D1ZL9/.', NULL, 150, 1, '2026-11-16', '2026-11-16 10:23:27');
