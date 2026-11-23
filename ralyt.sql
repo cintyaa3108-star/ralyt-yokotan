@@ -11,7 +11,7 @@
  Target Server Version : 120303 (12.3.3-MariaDB)
  File Encoding         : 65001
 
- Date: 22/11/2026 22:26:53
+ Date: 22/11/2026 22:37:23
 */
 
 SET NAMES utf8mb4;
@@ -345,9 +345,7 @@ INSERT INTO `palabras` VALUES (10, 2, 'Uts a bixe\'', 'Que te vaya bien', 'frase
 INSERT INTO `palabras` VALUES (11, 2, 'Kɨrintanaba', 'Cuídate', 'frase', 'Cuidate.mp4', 'cuidate.png', NULL, 5);
 INSERT INTO `palabras` VALUES (13, 2, 'K\'adios', 'Gracias', 'frase', 'Gracias.mp4', 'gracias.png', NULL, 7);
 INSERT INTO `palabras` VALUES (14, 2, 'Dalito', 'Nos vemos más tarde', 'frase', 'Nosvemosmastarde.mp4', 'nosvemosmastarde.png', NULL, 8);
-INSERT INTO `palabras` VALUES (15, 3, 'kɨne', 'Yo', 'palabra', NULL, 'yo.png', NULL, 1);
 INSERT INTO `palabras` VALUES (16, 3, 'Ane', 'Tú', 'palabra', 'Tu.mp4', 'tu.png', NULL, 2);
-INSERT INTO `palabras` VALUES (17, 3, 'Une', 'Él/Ella', 'palabra', NULL, 'elella.png', NULL, 3);
 INSERT INTO `palabras` VALUES (18, 3, 'Kɨnela', 'Nosotros', 'palabra', 'Nosotros.mp4', 'nosotros.png', NULL, 4);
 INSERT INTO `palabras` VALUES (19, 3, 'Anela', 'Ustedes', 'palabra', 'Ustedes.mp4', 'ustedes.png', NULL, 5);
 INSERT INTO `palabras` VALUES (20, 3, 'Unejob', 'Ellos/Ellas', 'palabra', 'EllosEllas.mp4', 'ellosellas.png', NULL, 6);
