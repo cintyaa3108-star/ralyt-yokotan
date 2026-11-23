@@ -1,5 +1,5 @@
 <?php /* Datos del controlador: $usuario, $errores, $aviso, $nivelActual, $hechas, $racha, $posicion, $actividad, $logros */
-$abrir = ($errores && in_array($_POST['accion'] ?? '', ['datos', 'password'], true)) ? $_POST['accion'] : '';   // reabre la ventana de edición si hubo errores
+$abrir = ($errores && in_array($_POST['accion'] ?? '', ['datos', 'password', 'avatar'], true)) ? $_POST['accion'] : '';   // reabre la ventana que tuvo errores
 ?>
 <?php if ($aviso): ?><div class="alert alert-success" role="status"><?= h($aviso) ?></div><?php endif; ?>
 <?php if ($errores && !$abrir): ?><div class="alert alert-danger" role="alert"><?php foreach ($errores as $e): ?><div><?= h($e) ?></div><?php endforeach; ?></div><?php endif; ?>
@@ -8,7 +8,10 @@ $abrir = ($errores && in_array($_POST['accion'] ?? '', ['datos', 'password'], tr
   <div class="col-md-4">
     <div class="card text-center mb-4">
       <div class="card-body">
-        <img src="<?= $usuario['avatar'] ? h($usuario['avatar']) : 'resources/imagenes/ajolote.png' ?>" width="120" height="120" class="rounded-circle mb-3" alt="Avatar">
+        <div class="rl-avatar-wrap mb-3">
+          <img src="<?= $usuario['avatar'] ? h($usuario['avatar']) : 'resources/imagenes/ajolote.png' ?>" width="120" height="120" style="width:120px;height:120px;object-fit:<?= $usuario['avatar'] ? 'cover' : 'contain' ?>" class="rounded-circle<?= $usuario['avatar'] ? ' avatar-foto' : '' ?>" alt="Foto de perfil">
+          <button type="button" class="rl-editar-foto" data-bs-toggle="modal" data-bs-target="#modalFoto" aria-label="Cambiar foto de perfil" title="Cambiar foto">✏️</button>
+        </div>
         <h1 class="h5 mb-0"><?= h($usuario['nombre']) ?></h1>
         <p class="text-muted small mb-2">@<?= h($usuario['usuario']) ?> · <?= h($usuario['correo']) ?></p>
         <span class="badge text-bg-primary"><?= h($nivelActual) ?></span>
@@ -79,7 +82,7 @@ $abrir = ($errores && in_array($_POST['accion'] ?? '', ['datos', 'password'], tr
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
-        <?php if ($abrir && $errores): ?><div class="alert alert-danger" role="alert"><?php foreach ($errores as $e): ?><div><?= h($e) ?></div><?php endforeach; ?></div><?php endif; ?>
+        <?php if ($abrir && $abrir !== 'avatar' && $errores): ?><div class="alert alert-danger" role="alert"><?php foreach ($errores as $e): ?><div><?= h($e) ?></div><?php endforeach; ?></div><?php endif; ?>
 
         <ul class="nav nav-pills nav-fill gap-2 mb-3" role="tablist">
           <li class="nav-item" role="presentation"><button class="nav-link active" id="tabDatos" data-bs-toggle="tab" data-bs-target="#panelDatos" type="button" role="tab" aria-controls="panelDatos" aria-selected="true">Mis datos</button></li>
@@ -92,6 +95,7 @@ $abrir = ($errores && in_array($_POST['accion'] ?? '', ['datos', 'password'], tr
               <?= csrf_campo() ?><input type="hidden" name="accion" value="datos">
               <label for="nombre" class="form-label">Nombre completo</label>
               <input type="text" class="form-control mb-3" id="nombre" name="nombre" value="<?= h($abrir === 'datos' ? ($_POST['nombre'] ?? '') : $usuario['nombre']) ?>" required>
+
               <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
             </form>
           </div>
@@ -118,7 +122,7 @@ $abrir = ($errores && in_array($_POST['accion'] ?? '', ['datos', 'password'], tr
   // Hubo errores al guardar: se vuelve a abrir la ventana en la pestaña correcta
   document.addEventListener('DOMContentLoaded', () => {
     <?php if ($abrir === 'password'): ?>bootstrap.Tab.getOrCreateInstance(document.getElementById('tabPass')).show();<?php endif; ?>
-    bootstrap.Modal.getOrCreateInstance(document.getElementById('modalEditar')).show();
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('<?= $abrir === 'avatar' ? 'modalFoto' : 'modalEditar' ?>')).show();
   });
 </script>
 <?php endif; ?>
@@ -144,3 +148,36 @@ $abrir = ($errores && in_array($_POST['accion'] ?? '', ['datos', 'password'], tr
     </form>
   </div>
 </div>
+<!-- Ventana: cambiar foto de perfil -->
+<div class="modal fade" id="modalFoto" tabindex="-1" aria-labelledby="tituloFoto" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form method="post" action="<?= u('perfil') ?>" enctype="multipart/form-data" class="modal-content">
+      <?= csrf_campo() ?>
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="tituloFoto">Cambiar foto de perfil</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-center">
+        <?php if ($abrir === 'avatar' && $errores): ?><div class="alert alert-danger text-start" role="alert"><?php foreach ($errores as $e): ?><div><?= h($e) ?></div><?php endforeach; ?></div><?php endif; ?>
+        <img id="vistaFoto" src="<?= $usuario['avatar'] ? h($usuario['avatar']) : 'resources/imagenes/ajolote.png' ?>" width="180" height="180" style="width:180px;height:180px;max-width:100%;object-fit:<?= $usuario['avatar'] ? 'cover' : 'contain' ?>" class="rl-preview rounded-circle mb-3<?= $usuario['avatar'] ? ' avatar-foto' : '' ?>" alt="Vista previa de tu foto">
+        <input type="file" class="form-control" id="archivoFoto" name="avatar" accept="image/png,image/jpeg,image/webp">
+        <div class="form-text">JPG, PNG o WEBP, máximo 2 MB. Se recorta en cuadrado desde el centro y se ajusta a una sola medida.</div>
+      </div>
+      <div class="modal-footer">
+        <?php if ($usuario['avatar']): ?><button type="submit" name="accion" value="avatar_quitar" class="btn btn-outline-secondary me-auto" formnovalidate>Quitar foto</button><?php endif; ?>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" name="accion" value="avatar" class="btn btn-primary">Guardar foto</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  // Vista previa de la foto elegida (antes de guardar)
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('archivoFoto'), vista = document.getElementById('vistaFoto');
+    if (!input || !vista) return;
+    input.addEventListener('change', () => {
+      if (input.files[0]) { vista.src = URL.createObjectURL(input.files[0]); vista.classList.add('avatar-foto'); vista.style.objectFit = 'cover'; }
+    });
+  });
+</script>

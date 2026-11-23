@@ -61,4 +61,9 @@ class Usuario
     public static function eliminar(int $uid): void {
         Conexion::get()->prepare('DELETE FROM usuarios WHERE id = ?')->execute([$uid]);
     }
+
+    /** Guarda la ruta de la foto de perfil (null = vuelve a la mascota). */
+    public static function actualizarAvatar(int $uid, ?string $ruta): void {
+        Conexion::get()->prepare('UPDATE usuarios SET avatar = ? WHERE id = ?')->execute([$ruta, $uid]);
+    }
 }

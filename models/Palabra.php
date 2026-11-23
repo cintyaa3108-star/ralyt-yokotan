@@ -2,28 +2,29 @@
 class Palabra
 {
     public static function deCategoria(int $cat): array {
-        $q = Conexion::get()->prepare('SELECT id, yokotan, espanol, audio, imagen FROM palabras WHERE categoria_id = ? ORDER BY orden');
-        $q->execute([$cat]);
+        // Incluye las subcategorías de la categoría (si tiene)
+        $q = Conexion::get()->prepare('SELECT p.id, p.yokotan, p.espanol, p.audio, p.imagen
+                                       FROM palabras p JOIN categorias c ON c.id = p.categoria_id
+                                       WHERE c.id = ? OR c.padre_id = ? ORDER BY c.orden, p.orden');
+        $q->execute([$cat, $cat]);
         return $q->fetchAll();
     }
 
     /** Parejas al azar para el memorama. */
     public static function pares(int $cat, int $cuantas = 6): array {
-        $q = Conexion::get()->prepare('SELECT id, yokotan, espanol, imagen FROM palabras WHERE categoria_id = ? ORDER BY RAND() LIMIT ' . $cuantas);
-        $q->execute([$cat]);
-        $pares = $q->fetchAll();
-        foreach ($pares as &$p) {
-            if (!empty($p['imagen']) && function_exists('ruta_imagen')) {
-                $p['imagen'] = ruta_imagen($p['imagen']);
-            }
-        }
-        return $pares;
+        $q = Conexion::get()->prepare('SELECT p.id, p.yokotan, p.espanol
+                                       FROM palabras p JOIN categorias c ON c.id = p.categoria_id
+                                       WHERE c.id = ? OR c.padre_id = ? ORDER BY RAND() LIMIT ' . $cuantas);
+        $q->execute([$cat, $cat]);
+        return $q->fetchAll();
     }
 
     /** Frases de la categoría (con 2 o más palabras, para poder ordenarlas). */
     public static function frases(int $cat): array {
-        $q = Conexion::get()->prepare("SELECT yokotan, espanol, audio FROM palabras WHERE categoria_id = ? AND tipo = 'frase' ORDER BY orden");
-        $q->execute([$cat]);
+        $q = Conexion::get()->prepare("SELECT p.yokotan, p.espanol, p.audio
+                                       FROM palabras p JOIN categorias c ON c.id = p.categoria_id
+                                       WHERE (c.id = ? OR c.padre_id = ?) AND p.tipo = 'frase' ORDER BY c.orden, p.orden");
+        $q->execute([$cat, $cat]);
         $frases = [];
         foreach ($q as $f) {
             if (count(preg_split('/\s+/u', trim($f['yokotan']))) < 2) continue;
